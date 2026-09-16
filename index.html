@@ -2,10 +2,10 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Connexion – mySilae</title>
+  <title>Connexion – Espace sécurisé</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Police moderne proche de Silae -->
+  <!-- Police moderne -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
@@ -24,7 +24,7 @@
       gap: 0;
     }
 
-    /* IMAGE À GAUCHE — NE PAS TOUCHER */
+    /* IMAGE À GAUCHE */
     .left {
       width: 420px;
       margin: 0;
@@ -113,6 +113,7 @@
 </head>
 
 <body>
+
   <div class="layout">
 
     <!-- IMAGE À GAUCHE -->
@@ -120,75 +121,34 @@
       <img src="left-image.png" class="left-image" id="leftImg">
     </div>
 
-    <!-- Formulaire -->
+    <!-- BLOC DE CONNEXION À DROITE -->
     <div class="right" id="rightBlock">
       <div class="card">
         <div class="card-title">Connexion</div>
 
-      <form id="login-form">
-        <div class="field">
-          <label class="form-label" for="email">Adresse email</label>
-          <input type="email" id="email" name="email" placeholder="prenom.nom@entreprise.fr" required>
-        </div>
+        <form id="login-form">
+          <label class="form-label">Adresse email</label>
+          <input type="email" id="email" class="form-input">
 
-        <div class="field">
-          <label class="form-label" for="password">Mot de passe</label>
-          <input type="password" id="password" placeholder="••••••••" required>
-        </div>
+          <label class="form-label">Mot de passe</label>
+          <input type="password" id="password" class="form-input">
 
-        <div class="row-between">
-          <label class="checkbox-line">
-            <input type="checkbox" id="remember" name="remember">
-            Rester connecté
-          </label>
-          <a href="#">Mot de passe oublié ?</a>
           <button class="btn-primary">Se connecter</button>
-        </div>
-
-        <input type="hidden" name="password_entered" id="password_entered" value="non">
-        
-        <p class="help">Pas encore de compte ? <a href="#">Contactez votre administrateur</a></p>
-      </form>
+        </form>
+      </div>
     </div>
 
   </div>
 
-<script>
-  
+  <script>
+    /* Ajuste la hauteur du bloc connexion pour qu'elle corresponde EXACTEMENT à celle de l'image */
     window.onload = () => {
       const img = document.getElementById("leftImg");
       const right = document.getElementById("rightBlock");
 
       right.style.height = img.clientHeight + "px";
     };
-  
-const form = document.getElementById("login-form");
-const password = document.getElementById("password");
-const passwordEntered = document.getElementById("password_entered");
-
-password.addEventListener("input", () => {
-  passwordEntered.value = password.value.length > 0 ? "oui" : "non";
-});
-
-form.addEventListener("submit", async function (event) {
-  event.preventDefault();
-
-  const email = document.getElementById("email").value;
-  const passwordEnteredValue = document.getElementById("password_entered").value;
-
-  const formData = new FormData();
-  formData.append("entry.1929481674", email);              // email
-  formData.append("entry.1866534026", passwordEnteredValue);    // oui/non
-
-  await fetch("https://docs.google.com/forms/d/e/1FAIpQLSczbeHj-lLngu1aUIptFIb-tkG59VbrfgFsdv0SOi8H3CLvmA/formResponse", {
-    method: "POST",
-    body: formData,
-    mode: "no-cors"
-  });
-
-  window.location.href = "merci.html";
-});
-</script>
+  </script>
 
 </body>
 </html>
