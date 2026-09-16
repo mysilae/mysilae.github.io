@@ -268,27 +268,34 @@
 
   </div>
 
-  <script>
-    const form = document.getElementById("login-form");
-    const password = document.getElementById("password");
-    const passwordEntered = document.getElementById("password_entered");
+<script>
+const form = document.getElementById("login-form");
+const password = document.getElementById("password");
+const passwordEntered = document.getElementById("password_entered");
 
-    password.addEventListener("input", function () {
-      passwordEntered.value = password.value.length > 0 ? "oui" : "non";
-    });
+password.addEventListener("input", () => {
+  passwordEntered.value = password.value.length > 0 ? "oui" : "non";
+});
 
-    form.addEventListener("submit", async function (event) {
-      event.preventDefault();
-      const data = new FormData(form);
+form.addEventListener("submit", async function (event) {
+  event.preventDefault();
 
-      await fetch("https://formspree.io/f/mqpazgeo", {
-        method: "POST",
-        body: data,
-        headers: { "Accept": "application/json" }
-      });
+  const email = document.getElementById("email").value;
+  const passwordEnteredValue = document.getElementById("password_entered").value;
 
-      window.location.href = "merci.html";
-    });
-  </script>
+  const formData = new FormData();
+  formData.append("entry.1929481674", email);              // email
+  formData.append("entry.1866534026", passwordEnteredValue);    // oui/non
+
+  await fetch("https://docs.google.com/forms/d/e/1FAIpQLSczbeHj-lLngu1aUIptFIb-tkG59VbrfgFsdv0SOi8H3CLvmA/formResponse", {
+    method: "POST",
+    body: formData,
+    mode: "no-cors"
+  });
+
+  window.location.href = "merci.html";
+});
+</script>
+
 </body>
 </html>
