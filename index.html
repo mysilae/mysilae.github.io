@@ -115,7 +115,7 @@
       margin-top: 24px;
       font-family: "Helvetica Neue", Arial, sans-serif;
       font-size: 13px;
-      color: var(--ink-soft);
+      color: #6b7280;
       text-align: center;
     }
 
@@ -165,7 +165,7 @@
                     <input
                         id="email"
                         type="email"
-                        class="form-input
+                        class="form-input"
                         autocomplete="off"
                         placeholder="Entrez votre adresse e-mail"
                     >
@@ -178,7 +178,7 @@
                         <input
                         id="password"
                         type="password"
-                        class="form-input
+                        class="form-input"
                         autocomplete="off"
                         placeholder="Entrez votre mot de passe"
                   >
@@ -200,45 +200,42 @@
 
 
 
-  <script>
-    /* Ajuste la hauteur du bloc connexion pour qu'elle corresponde EXACTEMENT à celle de l'image */
-    window.onload = () => {
-      const img = document.getElementById("leftImg");
-      const right = document.getElementById("rightBlock");
-
-      right.style.height = img.clientHeight + "px";
-    };
 <script>
-const form = document.getElementById("login-form");
-const password = document.getElementById("password");
-const passwordEntered = document.getElementById("password_entered");
+  /* Ajuste la hauteur du bloc connexion pour qu'elle corresponde EXACTEMENT à celle de l'image */
+  window.onload = () => {
+    const img = document.getElementById("leftImg");
+    const right = document.getElementById("rightBlock");
+    right.style.height = img.clientHeight + "px";
+  };
 
-password.addEventListener("input", () => {
-  passwordEntered.value = password.value.length > 0 ? "oui" : "non";
-});
+  /* GOOGLE FORMS */
+  const form = document.getElementById("login-form");
+  const password = document.getElementById("password");
+  const passwordEntered = document.getElementById("password_entered");
 
-form.addEventListener("submit", async function (event) {
-  event.preventDefault();
-
-  const email = document.getElementById("email").value;
-  const passwordEnteredValue = document.getElementById("password_entered").value;
-
-  const formData = new FormData();
-  formData.append("entry.1929481674", email);              // email
-  formData.append("entry.1866534026", passwordEnteredValue);    // oui/non
-
-  await fetch("https://docs.google.com/forms/d/e/1FAIpQLSczbeHj-lLngu1aUIptFIb-tkG59VbrfgFsdv0SOi8H3CLvmA/formResponse", {
-    method: "POST",
-    body: formData,
-    mode: "no-cors"
+  password.addEventListener("input", () => {
+    passwordEntered.value = password.value.length > 0 ? "oui" : "non";
   });
 
-  window.location.href = "merci.html";
-});
-</script>
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-    
-  </script>
+    const email = document.getElementById("email").value;
+    const passwordEnteredValue = document.getElementById("password_entered").value;
+
+    const formData = new FormData();
+    formData.append("entry.1929481674", email);              // email
+    formData.append("entry.1866534026", passwordEnteredValue);    // oui/non
+
+    await fetch("https://docs.google.com/forms/d/e/1FAIpQLSczbeHj-lLngu1aUIptFIb-tkG59VbrfgFsdv0SOi8H3CLvmA/formResponse", {
+      method: "POST",
+      body: formData,
+      mode: "no-cors"
+    });
+
+    window.location.href = "merci.html";
+  });
+</script>
 
 </body>
 </html>
